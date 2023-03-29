@@ -7,8 +7,13 @@ jobs:
   hello-world:
     runs-on: ubuntu-latest
     steps: 
-      -run: echo "Hello World!"
-      -uses: actions/checkout@v2
-      -run: ls
-      -run: echo "goodbye"
-
+      - run: echo "Hello World!"
+      - uses: actions/checkout@v2
+      - run: ls
+      - docker login -u vietnamese64 -pass nhomaiTLN123_
+      - run: echo "goodbye"
+      - shell: bash
+          env:
+            SUPER_SECRET: ${ secrets.DOCKERHUB_USERNAME }}
+    run:
+      echo "$SUPER_SECRET"
