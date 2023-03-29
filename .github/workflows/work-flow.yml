@@ -1,0 +1,30 @@
+on:
+  push:
+    branches: [main]
+    workflows-dispatch:
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  IMAGE_NAME: Long
+  TAG: latest
+jobs:
+  Docker-build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -t ${{ env.IMAGE_NAME }}:${{ env.TAG }} .
+
+      - name: Tag image to DockerHub repo
+        run: docker tag ${{ env.IMAGE_NAME }}:${{ env.TAG }} ${{ env.DOCKER_USERNAME }}/springcat:${{ env.TAG }}
+
+      - name: Push Docker image to DockerHub
+        run: docker push ${{ env.DOCKER_USERNAME }}/springcat:${{ env.TAG }}
