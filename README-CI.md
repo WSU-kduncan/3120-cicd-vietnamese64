@@ -8,7 +8,7 @@ Run Project Locally:
 - To build an image from the Dockerfile first need to a Dockerfile file and a index.html file on ubuntu. After having those 2 files with all the codes that need to create a image, then run the following code to build "docker build -t long-day ."
 - To run the container use the following code "docker run -d -p 80:80 long-day"
 
-- to view or see if the container is working open the brower and type in "localhost" which is for port 80"
+- localhost is just an ip.  By using a browser, it will by default try port 80 on that ip to see if a service responds.
 
 
 part-2: 
