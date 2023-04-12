@@ -6,8 +6,7 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   IMAGE_NAME: long
-  TAG: 
-    - "v*.*.*"
+  TAG: "v*.*.*"
 jobs:
   Docker-build-and-push:
     runs-on: ubuntu-latest
