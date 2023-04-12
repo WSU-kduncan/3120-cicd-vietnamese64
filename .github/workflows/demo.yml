@@ -20,7 +20,6 @@ jobs:
           tags:
             type= semver,pattern={{major}}
             type= semver,pattern={{major}}.{{minor}}
-      - name: Build and push
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
