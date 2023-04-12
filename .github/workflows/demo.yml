@@ -39,8 +39,5 @@ jobs:
             push: true
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.output.labels }}
-        name: My step
-        env:
-          MY_SECRET: ${{ secrets.DOCKERHUB_USERNAME }}
-          run: echo "My secret is $MY_SECRET"
+
 
