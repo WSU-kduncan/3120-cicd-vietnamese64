@@ -9,35 +9,30 @@ jobs:
   hello-world:
     runs-on: ubuntu-latest
     steps: 
-      
+      - run: echo "Hello World!"
       - uses: actions/checkout@v2
       - name: Collecting tag data
         id: meta
         uses: docker/metadata-action@v4
-        with:
-          images:
+        with: 
+          images: 
             vietnamese64/springcat
           tags:
-            type= semver,pattern={{major}}
-            type= semver,pattern={{major}}.{{minor}}
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with: 
-          username: ${ secrets.DOCKERHUB_USERNAME}}
-          password: ${{ secrets.DOCKERHUB_PAT}} 
-      -
-        name: Build and push
+            type= semver, pattern= {{major}}
+            type= semver, pattern= {{major}}.{{minor}}
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
             push: true
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.output.labels }}
-
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+      - run: ls
+      - run: echo "goodbye"
+      - shell: bash
+        env:
+          SUPER_SECRET: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
