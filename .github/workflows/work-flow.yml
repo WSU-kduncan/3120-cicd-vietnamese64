@@ -6,13 +6,24 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   IMAGE_NAME: long
-  TAG: latest
+  TAG: 
+    - "v*.*.*"
 jobs:
   Docker-build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+          
+      - name: Collecting tag data
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images:
+            vietnamese64/springcat
+          tags:
+            type= semver,pattern={{major}}
+            type= semver,pattern={{major}}.{{minor}}
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -28,3 +39,9 @@ jobs:
 
       - name: Push Docker image to DockerHub
         run: docker push ${{ env.DOCKER_USERNAME }}/springcat:${{ env.TAG }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.output.labels }}
