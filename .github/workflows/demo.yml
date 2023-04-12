@@ -4,12 +4,28 @@ on:
     branches: [main]
     workflow-dispatch:
     tags:
+      -"v*.*.*"
 jobs:
   hello-world:
     runs-on: ubuntu-latest
     steps: 
       - run: echo "Hello World!"
       - uses: actions/checkout@v2
+      - name: Collecting tag data
+        id: meta
+        uses: docker/metadata-action@v4
+        with: 
+          images: 
+            vietnamese64/springcat
+          tags:
+            type:semver,pattern={{major}}
+            type:semver,pattern={{major}}.{{minor}}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+          with:
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.output.labels }}
       - run: ls
         #- docker login -u vietnamese64 -pass nhomaiTLN123_
       - run: echo "goodbye"
