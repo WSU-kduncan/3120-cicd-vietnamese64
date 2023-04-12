@@ -18,9 +18,9 @@ jobs:
           images: 
             vietnamese64/springcat
           tags:
-            type=semver,pattern={{major}}
-            type=semver,pattern={{major}}.{{minor}}
-        name: Build and push
+            type= semver, pattern= {{major}}
+            type= semver, pattern= {{major}}.{{minor}}
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
             push: true
