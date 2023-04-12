@@ -39,3 +39,11 @@ jobs:
             push: true
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.output.labels }}
+      - run: ls
+        #- docker login -u vietnamese64 -pass nhomaiTLN123_
+      - run: echo "goodbye"
+      - shell: bash
+        env:
+            SUPER_SECRET: ${ secrets.DOCKERHUB_USERNAME}}
+    run:
+      echo "$SUPER_SECRET"
