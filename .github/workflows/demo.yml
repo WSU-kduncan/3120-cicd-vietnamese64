@@ -3,6 +3,9 @@ on:
   push:
     branches: [main]
     workflow-dispatch:
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     tags:
       - "v*.*.*"
 jobs:
@@ -39,13 +42,5 @@ jobs:
               #tags: vietnamese64/springcat:latest
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.output.labels }}
-      - run: ls
-        #- docker login -u vietnamese64 -pass nhomaiTLN123_
-      - run: echo "goodbye"
-      - shell: bash
-        env:
-            SUPER_SECRET: ${ secrets.DOCKERHUB_USERNAME}}
-        run:
-          echo "$SUPER_SECRET"
 
 
