@@ -28,6 +28,6 @@ Container restart script:
  - $ sudo docker rm khacontainer: This command removes the stopped container 
  - $ sudo docker pull vietnamese64/springcat:latest: This command pulls the latest image from the DockerHub repository 
  - $ sudo docker run -d --name container -p 88:80 vietnamese64/springcat:latest: This command runs a container on port 88 and names it container using the image that was pulled in the previous step.
- -The script is named deploy.sh and needs to have its permission changed to be executable.
+ - The script is named deploy.sh and needs to have its permission changed to be executable.
   The script can be saved in either the main directory or the default directory when connecting to the instance.
   After saving the script, you can try it out by running the command "./deploy.sh". This will execute the script, allowing   you to see the outcome by accessing the container.
